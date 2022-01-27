@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `review4` (
   `comment` VARCHAR(45) NULL,
   `book4_no` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_review4_book4_idx` (`book4_no` ASC) VISIBLE,
+  INDEX `fk_review4_book4_idx` (`book4_no` ASC) ,
   CONSTRAINT `fk_review4_book4`
     FOREIGN KEY (`book4_no`)
     REFERENCES `book4` (`no`)
