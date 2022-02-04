@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberAddress` (
   `addressLine2` VARCHAR(200) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_address_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_address_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_address_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberEmail` (
   `domain` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberEmail_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberEmail_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberEmail_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberSns` (
   `snsId` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_table1_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_table1_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_table1_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberProject` (
   `company` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberProject_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberProject_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberProject_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberNationality` (
   `nationalityCd` INT NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberNationality_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberNationality_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberNationality_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberMobile` (
   `mobile` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberMobile_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberMobile_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberMobile_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -118,14 +118,14 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberMobile` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `rebecca`.`inftMemberPaswordQuestion` (
+CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberPasswordQuestion` (
   `no` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order` INT NULL,
   `passwordQuestionCd` INT NULL,
   `passwordAnswer` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_inftMemberPaswordQuestion_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_inftMemberPaswordQuestion_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_inftMemberPaswordQuestion_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberJob` (
   `choice` INT NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberJob_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberJob_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberJob_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberHobby` (
   `hobbyCd` INT NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberHobby_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberHobby_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberHobby_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `rebecca`.`infrMemberEmail` (
   `domain` VARCHAR(100) NULL,
   `infrMember_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`),
-  INDEX `fk_infrMemberEmail_infrMember1_idx` (`infrMember_no` ASC) VISIBLE,
+  INDEX `fk_infrMemberEmail_infrMember1_idx` (`infrMember_no` ASC),
   CONSTRAINT `fk_infrMemberEmail_infrMember1`
     FOREIGN KEY (`infrMember_no`)
     REFERENCES `rebecca`.`infrMember` (`no`)
@@ -181,7 +181,7 @@ ENGINE = InnoDB;
 
 desc infrmember;
 
-select * from infrMember;
+select * from infrMemberpasswordquestion;
 
 -- infrmember
 
@@ -221,31 +221,34 @@ insert into infrMember (
 -- 공통코드 테이블
 
 CREATE TABLE IF NOT EXISTS `rebecca`.`infrCodeGroup` (
-  `no` BIGINT(11) NOT NULL,
+  `no` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `anotherNo` VARCHAR(100) NULL,
   `name` VARCHAR(100) NULL,
   PRIMARY KEY (`no`))
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `rebecca`.`infrCode` (
-  `no` BIGINT(11) NOT NULL,
+  `no` BIGINT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `anotherNo` VARCHAR(100) NULL,
   `name` VARCHAR(100) NULL,
-  `infrCodeGroup_no` BIGINT(11) NOT NULL,
+  `infrCodeGroup_no` BIGINT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`no`, `infrCodeGroup_no`),
-  INDEX `fk_code_codeGroup1_idx` (`infrCodeGroup_no` ASC) VISIBLE,
-  CONSTRAINT `fk_code_codeGroup1`
+  UNIQUE INDEX `no_UNIQUE` (`no` ASC),
+  INDEX `fk_infrCode_infrCodeGroup1_idx` (`infrCodeGroup_no` ASC),
+  CONSTRAINT `fk_infrCode_infrCodeGroup1`
     FOREIGN KEY (`infrCodeGroup_no`)
     REFERENCES `rebecca`.`infrCodeGroup` (`no`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+drop table infrCodeGroup;
+
 desc codeGroup;
 desc code;
 
-select * from codeGroup;
-select * from code;
+select * from infrCodeGroup;
+select * from infrCode;
 
 -- 공통코드 테이블에 정보 들어가 있어야 함
 
@@ -253,7 +256,7 @@ insert into infrCodeGroup (
 	no
     , name
 ) values (
-	13
+	1
     , 'infr_addressType'
 );
 
