@@ -452,3 +452,17 @@ now(),
 now(),
 2,
 2);
+
+alter table infrMemberEmail modify ifmeTypeCd bigint;
+alter table infrmemberemail modify ifmeEmailDomainCd bigint;
+alter table infrmember modify ifmmGenderCd bigint;
+alter table infrmember modify ifmmSavedCd bigint;
+alter table infrmember modify ifmmMarriageCd bigint;
+alter table infrmemberaddress modify ifmaTypeCd bigint;
+alter table infrmemberaddressonline modify ifaoSnsTypeCd bigint;
+alter table infrmemberaddressonline modify ifaoTypeCd bigint;
+alter table infrmemberhobby modify ifmhHobbyCd bigint;
+alter table infrmemberjoinqna modify ifjqQuestionCd bigint;
+alter table infrmemberphone modify ifmpTelecomCd bigint;
+alter table infrmemberphone modify ifmpTypeCd bigint;
+alter table infrmemberphone modify ifmpDeviceCd bigint;
