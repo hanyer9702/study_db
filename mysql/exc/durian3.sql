@@ -87,3 +87,258 @@ where 1=1
 ;
 
 alter table infrmembernationality add ifmnDefaultNy tinyint after ifmnSeq ;
+
+CREATE TABLE IF NOT EXISTS `durian`.`infrMenu` (
+  `ifmuSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ifmuAdminNy` TINYINT NULL,
+  `ifmuName` VARCHAR(50) NOT NULL,
+  `ifmuNameEng` VARCHAR(50) NULL,
+  `ifmuUrl` VARCHAR(100) NULL,
+  `ifmuParents` BIGINT NULL,
+  `ifmuDepth` TINYINT NULL COMMENT '단계정보',
+  `ifmuUseNy` TINYINT NULL,
+  `ifmuOrder` TINYINT NULL,
+  `ifmuDesc` VARCHAR(255) NULL,
+  `ifmuDelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  PRIMARY KEY (`ifmuSeq`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `durian`.`infrAuth` (
+  `ifatSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ifatAdminNy` TINYINT NULL,
+  `ifatName` VARCHAR(50) NOT NULL,
+  `ifatNameEng` VARCHAR(50) NULL,
+  `ifatUseNy` TINYINT NULL,
+  `ifatOrder` TINYINT NULL,
+  `ifatDesc` VARCHAR(255) NULL,
+  `ifatDelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  PRIMARY KEY (`ifatSeq`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `durian`.`infrAuthMenu` (
+  `ifauSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ifauRoleCd` BIGINT NULL COMMENT '관리, 조회\n목록, 등록, 수정, 삭제, 조회',
+  `ifauUserNy` TINYINT NULL,
+  `ifauOrder` TINYINT NULL,
+  `ifauDesc` VARCHAR(255) NULL,
+  `ifauDelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT(11) NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  `ifatSeq` BIGINT UNSIGNED NOT NULL,
+  `ifmuSeq` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ifauSeq`),
+  INDEX `fk_infrAuthMenu_infrAuth1_idx` (`ifatSeq` ASC),
+  INDEX `fk_infrAuthMenu_infrMenu1_idx` (`ifmuSeq` ASC),
+  CONSTRAINT `fk_infrAuthMenu_infrAuth1`
+    FOREIGN KEY (`ifatSeq`)
+    REFERENCES `durian`.`infrAuth` (`ifatSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_infrAuthMenu_infrMenu1`
+    FOREIGN KEY (`ifmuSeq`)
+    REFERENCES `durian`.`infrMenu` (`ifmuSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `durian`.`infrAuthMember` (
+  `ifamSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ifamDefaultNy` TINYINT NULL,
+  `ifamUserNy` TINYINT NULL,
+  `ifamOrder` TINYINT NULL,
+  `ifamDesc` VARCHAR(255) NULL,
+  `ifamDelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  `ifatSeq` BIGINT UNSIGNED NOT NULL,
+  `ifmmSeq` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ifamSeq`),
+  INDEX `fk_infrAuthMember_infrAuth1_idx` (`ifatSeq` ASC),
+  INDEX `fk_infrAuthMember_infrMember1_idx` (`ifmmSeq` ASC),
+  CONSTRAINT `fk_infrAuthMember_infrAuth1`
+    FOREIGN KEY (`ifatSeq`)
+    REFERENCES `durian`.`infrAuth` (`ifatSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_infrAuthMember_infrMember1`
+    FOREIGN KEY (`ifmmSeq`)
+    REFERENCES `durian`.`infrMember` (`ifmmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `durian`.`infrLogLogin` (
+  `iflgSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ifmmId` VARCHAR(50) NULL,
+  `ifmmSeq` BIGINT NULL,
+  `iflgResultNy` TINYINT NULL,
+  `iflgDelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  PRIMARY KEY (`iflgSeq`))
+ENGINE = InnoDB;
+
+desc infrAuth;
+
+select * from infrAuth;
+
+INSERT INTO `durian`.`infrauth`
+(
+`ifatAdminNy`,
+`ifatName`,
+`ifatUseNy`,
+`ifatOrder`,
+`ifatDelNy`,
+`regDateTime`,
+`regDateTimeSvr`,
+`modDateTime`,
+`modDateTimeSvr`)
+VALUES
+(
+1,
+'회원관리',
+1,
+1,
+0,
+now(),
+now(),
+now(),
+now());
+
+INSERT INTO `durian`.`infrmenu`
+(
+`ifmuAdminNy`,
+`ifmuName`,
+`ifmuParents`,
+`ifmuDepth`,
+`ifmuUseNy`,
+`ifmuOrder`,
+`ifmuDelNy`,
+`regDateTime`,
+`regDateTimeSvr`,
+`modDateTime`,
+`modDateTimeSvr`)
+VALUES
+(
+1,
+'테스트관리',
+3,
+1,
+1,
+3,
+0,
+now(),
+now(),
+now(),
+now());
+
+select * from infrmenu;
+
+desc infrauthmenu;
+
+INSERT INTO `durian`.`infrauthmenu`
+(
+`ifauRoleCd`,
+`ifauUserNy`,
+`ifauOrder`,
+`ifauDelNy`,
+`regDateTime`,
+`regDateTimeSvr`,
+`modDateTime`,
+`modDateTimeSvr`,
+`ifatSeq`,
+`ifmuSeq`)
+VALUES
+(
+1,
+1,
+2,
+0,
+now(),
+now(),
+now(),
+now(),
+2,
+11);
+
+select * from infrauthmenu;
+
+
+INSERT INTO `durian`.`infrauthmember`
+(
+`ifamDefaultNy`,
+`ifamUserNy`,
+`ifamOrder`,
+`ifamDelNy`,
+`regDateTime`,
+`regDateTimeSvr`,
+`modDateTime`,
+`modDateTimeSvr`,
+`ifatSeq`,
+`ifmmSeq`)
+VALUES
+(
+1,
+1,
+1,
+0,
+now(),
+now(),
+now(),
+now(),
+3,
+1);
+
+select * from infrauthmember;
+
+select
+	b.ifatSeq
+    , b.ifatName
+    , a.ifmuSeq
+    , c.ifmuName
+    , a.ifauOrder
+	, (select ifcdName from infrCode where ifcdSeq = a.ifauRoleCd) as 역할
+from infrAuthMenu a
+	left join infrAuth b on b.ifatSeq = a.ifatSeq
+	left join infrMenu c on c.ifmuSeq = a.ifmuSeq
+where 1=1
+;
