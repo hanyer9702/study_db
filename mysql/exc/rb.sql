@@ -484,4 +484,84 @@ CREATE TABLE IF NOT EXISTS `rb`.`infrAuthMenu` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `rb`.`shmlItem` (
+  `shimSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `shimCategory` BIGINT NULL,
+  `shimName` VARCHAR(200) NULL,
+  `shimDiscount` INT NULL,
+  `shimDeliveryDate` INT NULL,
+  `shimBrand` VARCHAR(100) NULL,
+  `shimPoint` INT NULL COMMENT '적립률',
+  `shimMaximum` INT NULL COMMENT '최대구매수량',
+  `shimOverseasDelivery` TINYINT NULL,
+  `shimCompany` BIGINT NULL,
+  `shimCertificationCd` BIGINT NULL,
+  `shimItemStateCd` BIGINT NULL,
+  `shimTaxFreeNy` TINYINT NULL,
+  `shimOriginCd` BIGINT NULL,
+  `DelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  PRIMARY KEY (`shimSeq`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `rb`.`shmlPrice` (
+  `shpcSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `shpcPrice` INT NULL,
+  `shpcDate` DATE NULL,
+  `DelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  `shimSeq` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`shpcSeq`),
+  INDEX `fk_shmlPrice_shmlItem1_idx` (`shimSeq` ASC),
+  CONSTRAINT `fk_shmlPrice_shmlItem1`
+    FOREIGN KEY (`shimSeq`)
+    REFERENCES `rb`.`shmlItem` (`shimSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `rb`.`shmlItemDesc` (
+  `shidSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `shidEntryCode` BIGINT NULL,
+  `shidContents` VARCHAR(100) NULL,
+  `DelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  `shimSeq` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`shidSeq`),
+  INDEX `fk_shmlItemCategoryEntry_shmlItem1_idx` (`shimSeq` ASC),
+  CONSTRAINT `fk_shmlItemCategoryEntry_shmlItem1`
+    FOREIGN KEY (`shimSeq`)
+    REFERENCES `rb`.`shmlItem` (`shimSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 -- \func now()
