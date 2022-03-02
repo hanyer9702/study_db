@@ -563,5 +563,30 @@ CREATE TABLE IF NOT EXISTS `rb`.`shmlItemDesc` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `rb`.`shmlItemOption` (
+  `shioSeq` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `shioOption` VARCHAR(100) NULL,
+  `shioPrice` INT NULL,
+  `DelNy` TINYINT NOT NULL,
+  `regIp` VARCHAR(100) NULL,
+  `regSeq` BIGINT NULL,
+  `regDevice` TINYINT NULL,
+  `regDateTime` DATETIME NULL,
+  `regDateTimeSvr` DATETIME NULL,
+  `modIp` VARCHAR(100) NULL,
+  `modSeq` BIGINT NULL,
+  `modDevice` TINYINT NULL,
+  `modDateTime` DATETIME NULL,
+  `modDateTimeSvr` DATETIME NULL,
+  `shimSeq` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`shioSeq`, `shimSeq`),
+  INDEX `fk_shmlItemOption_shmlItem1_idx` (`shimSeq` ASC),
+  CONSTRAINT `fk_shmlItemOption_shmlItem1`
+    FOREIGN KEY (`shimSeq`)
+    REFERENCES `rb`.`shmlItem` (`shimSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- \func now()
