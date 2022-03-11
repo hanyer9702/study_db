@@ -24,3 +24,9 @@ where 1=1
 
 -- 상품 상세정보 끝
 
+select
+	concat("[",a.ifmaZipcode,"] ",a.ifmaAddress1," ",a.ifmaAddress2)
+    , b.ifmmName
+from
+	infrmemberaddress a
+left join infrmember b on b.ifmmSeq = a.ifmmSeq;

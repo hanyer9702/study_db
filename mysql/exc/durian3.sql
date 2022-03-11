@@ -69,8 +69,11 @@ select
     , (select ifcdName from infrcode where f.ifjqQuestionCd = ifcdSeq) as 질문
     , f.ifjqAnswer
     , (select ifcdName from infrcode where h.ifmpTelecomCd = ifcdSeq) as 통신사
-    , h.ifmpNumber
+    , ifmpNumber
+	, concat(substring(ifmpNumber,1,3),"-",substring(ifmpNumber,4,4),"-",substring(ifmpNumber,7,4)) as ifmpNumberDash
     , concat(substring(h.ifmpNumber,1,3),"-",substring(h.ifmpNumber,4,4),"-",substring(h.ifmpNumber,7,4)) as 전화번호보기
+    , (select concat(substring(ifmpNumber,1,2),"-",substring(ifmpNumber,3,3),"-",substring(ifmpNumber,6,4)) from infrmemberphone where ifmpDeviceCd = 24 and ifmpDefaultNy = 1) as ifmpHomeNumber
+    , (select concat(substring(ifmpNumber,1,3),"-",substring(ifmpNumber,4,3),"-",substring(ifmpNumber,7,4)) from infrmemberphone where ifmpDeviceCd = 26 and ifmpDefaultNy = 1) as ifmpFaxNumber
     , (select ifnaName from infrnationality where ifnaSeq = g.ifnaSeq) as 국적
     
 from infrmember a
@@ -80,9 +83,10 @@ from infrmember a
     -- left join infrmemberhobby e on e.ifmhDelNy = 0 and e.ifmhDefaultNy = 1 and e.ifmmSeq = a.ifmmSeq
     left join infrmemberjoinqna f on f.ifjqDelNy = 0 and f.ifmmSeq = a.ifmmSeq
     left join infrmembernationality g on g.ifmnDefaultNy = 1 and g.ifmnDelNy = 0 and g.ifmmSeq = a.ifmmSeq
-    left join infrmemberphone h on h.ifmpDelNy = 0 and h.ifmpDefaultNy = 1 and h.ifmmSeq = a.ifmmSeq
+    left join infrmemberphone h on h.ifmpDelNy = 0 and h.ifmpDefaultNy = 1 and h.ifmmSeq = a.ifmmSeq and h.ifmpDeviceCd = 25 and h.ifmpDefaultNy = 1
 where 1=1
 	and a.ifmmDelNy = 0
+    and a.ifmmSeq = 2
     -- and a.ifmmId like '%xd%'
 ;
 
